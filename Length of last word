@@ -1,0 +1,24 @@
+<summary>
+Find the length of last word in string
+</summary>
+<param name ="string">It consists of uppercase,lowercase and space</param>
+<returns> length of last word</returns>
+public class Solution {
+    public int LengthOfLastWord(string s) {
+        
+        //Check for empty and null string
+        if(string.IsNullOrEmpty(s) || string.IsNullOrWhiteSpace(s))
+            return 0;
+            
+        if(s.Length == 1)
+            return s.Length;
+        
+        //Add only words without whitepace.    
+        string[] words = s.Split(null).Where(x=>x != String.Empty).ToArray();
+        
+        string lastWord = words[words.Length-1];
+        return lastWord.Length;
+       
+        
+    }
+}
