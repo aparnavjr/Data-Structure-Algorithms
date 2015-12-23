@@ -1,0 +1,38 @@
+public class Solution {
+    public int MaxProduct(string[] words) {
+        if(words.Length == 0)
+      return 0;
+   
+    
+   
+   	int max = 0;
+    for(int i=0;i < words.Length;i++)
+    {
+      	char [] word = words[i].ToCharArray();
+      	int[] letters = new int[26];
+      	foreach(char c in word)
+          letters[c -'a']++;
+      
+        for(int j = i+1 ; j < words.Length;j++)
+        {
+          char[] second = words[j].ToCharArray();
+          int k =0;
+          for(; k < second.Length;k++)
+          {
+            if(letters[second[k] - 'a'] != 0)
+            break;
+          }
+          
+          if(k == words[j].Length)
+            max = Math.Max(max, (words[i].Length * words[j].Length));
+          
+        }
+      
+        
+    }
+   	
+   	return max;
+        
+        
+    }
+}
