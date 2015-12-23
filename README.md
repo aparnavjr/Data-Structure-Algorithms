@@ -1,1 +1,1 @@
-# Data-Structure-Algorithms
+# string algorithms for practice
