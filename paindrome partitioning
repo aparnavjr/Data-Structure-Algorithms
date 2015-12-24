@@ -1,0 +1,51 @@
+public class Solution {
+    public IList<IList<string>> Partition(string s) {
+        
+        List<IList<string>> result = new List<IList<string>>();
+        
+        if(s.Length == 0 || String.IsNullOrEmpty(s))
+            return result;
+            
+        List<string> lis = new List<string>();
+        
+        PartitionHelper(s,lis,ref result);
+  
+  		return result;
+        
+    }
+    
+    public static bool CheckPalin(string s)
+    {
+        int low = 0; int high = s.Length-1;
+        while(low <= high)
+        {
+            if(s[low] != s[high])
+                return false;
+                
+            low++;
+            high--;
+        }
+        
+        return true;
+        
+    }
+    
+    public static void PartitionHelper(string s, List<string> lis, ref List<IList<string>> result )
+    {
+        if(s.Length == 0)
+            result.Add(new List<string>(lis));
+            
+        for(int i = 1 ;i <=s.Length; i++)
+        {
+            string sub = s.Substring(0,i);
+            if(CheckPalin(sub))
+            {
+                lis.Add(sub);
+                string res = s.Substring(i);
+                PartitionHelper(res,lis,ref result);
+                lis.RemoveAt((lis.Count-1));
+                
+            }
+        }
+    }
+}
