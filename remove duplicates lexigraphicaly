@@ -1,0 +1,45 @@
+public class Solution {
+    public string RemoveDuplicateLetters(string s) {
+        
+        
+  if(String.IsNullOrEmpty(s))
+            return "" ;
+         
+         int[] count = new int[26];
+         
+         char [] array = s.ToCharArray();
+         Stack<char> st = new Stack<char>();
+         
+         foreach(char c in array)
+            count[c-'a']++;
+            
+         
+         foreach(char c in array)
+         {
+             count[c - 'a']--;
+             
+             if(st.Contains(c))
+                continue;
+             
+             while(st.Count != 0 && st.Peek() >= c && count[st.Peek()-'a'] > 0)
+                    st.Pop();
+                    
+              st.Push(c);
+                           
+         }
+         
+         StringBuilder buf = new StringBuilder();
+         while(st.Count != 0)
+         {
+             buf.Append(st.Pop());
+         }
+         
+         
+  		char[] result = buf.ToString().Reverse().ToArray();
+  
+  		return (new string(result));
+  		
+  		
+}
+         
+}
