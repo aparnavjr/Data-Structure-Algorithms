@@ -1,0 +1,51 @@
+public static IList<List<string>> GroupAnagrams(string[] strs)
+{
+  IList<List<string>> result = new List<List<string>>();
+  
+  if(strs.Length == 0)
+    	return result;
+  
+  Dictionary<string,SortedSet<string>> map = new Dictionary<string,SortedSet<string>>();
+  
+  for(int i =0;i< strs.Length ;i++)
+  {
+    string key = strs[i];
+    //Console.WriteLine("key" +" "+key);
+    char[] orign = strs[i].ToCharArray();
+    Array.Sort(orign);
+    if(map.ContainsKey(new string(orign)))
+    {
+      
+      SortedSet<string> coll = map[new string(orign)];
+      coll.Add(key);
+   	
+    }
+       
+    else
+    {
+    	//Console.WriteLine(new string(orign));
+        SortedSet<string> seti = new SortedSet<string>();
+      	seti.Add(key);
+        map.Add(new string(orign), seti);
+         
+    }
+  }
+  
+  foreach(KeyValuePair<string,SortedSet<string>> entry in map)
+  {
+     //Console.Write("key"+ entry.Key + " ");
+     List<string> list = new List<string>();
+     foreach(string pair in entry.Value)
+    {
+      //Console.Write("pair" + pair + " ");
+      list.Add(pair);
+    }
+    
+    result.Add(list);
+    //Console.WriteLine();
+  }
+
+  Console.WriteLine(result.Count);
+  return result;
+  
+}
