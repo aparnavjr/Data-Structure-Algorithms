@@ -1,0 +1,51 @@
+public class Solution {
+    public string ReverseWords(string s) {
+        
+        s = string.Join( " ", s.Split( new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries ));
+        
+        if(String.IsNullOrEmpty(s) || String.IsNullOrWhiteSpace(s))
+            return "";
+        
+        int start = 0; int end = 0;
+        int len = s.Length;
+        
+        char[] array = s.ToCharArray();
+        reverse(start,len-1,array);
+        
+        while(end < len)
+        {
+          if(array[end] != ' ')
+          {
+              start = end;
+              
+              while(end < len && array[end]!= ' ')
+                end++;
+            
+              end--;    
+              
+              reverse(start,end,array);
+          }     
+                
+           end++; 
+        }
+        
+        
+        return new string(array);
+    }
+    
+    public static void reverse(int start, int end, char[] array)
+    {
+       
+        while(start < end)
+        {
+            char st = array[start];
+            array[start] = array[end];
+            array[end] = st;
+            start++;
+            end--;
+            
+        }
+        
+        
+    }
+}
