@@ -1,0 +1,43 @@
+public class Solution {
+    public string Multiply(string num1, string num2) {
+        
+        StringBuilder sb = new StringBuilder();
+        
+        if(num1 == "0" || num2 == "0")
+            return "0";
+            
+        char[] numOne = num1.ToCharArray();
+        Array.Reverse(numOne);
+        
+        char[] numTwo = num2.ToCharArray();
+        Array.Reverse(numTwo);
+        
+        int[] digits = new int[numOne.Length+numTwo.Length];
+        
+        for(int i = 0; i < numOne.Length;i++)
+            for(int j = 0; j < numTwo.Length;j++)
+            {
+                digits[i+j] += (numOne[i]-'0') * (numTwo[j] - '0');
+            }
+            
+        
+        for(int i = 0; i < digits.Length;i++)
+        {
+            int carry = digits[i]/10;
+            int sum = digits[i]%10;
+            
+            if(i+1 < digits.Length)
+            {
+                digits[i+1] += carry;
+            }
+            
+            sb.Insert(0,sum);
+        }
+        
+        if(sb[0] == '0' && sb.Length >1)
+            sb[0]=' ';
+        
+        return sb.ToString().Trim();
+        
+    }
+}
