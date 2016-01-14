@@ -1,0 +1,60 @@
+public class Solution {
+    public string ShortestPalindrome(string s) {
+        
+      int minlength = Int16.MaxValue;
+      string minstring = null;
+      
+      if(s.Length ==0 || s== null)
+        return "";
+      
+      if(s.Length == 1)
+      {
+        return s;
+      }
+      
+      for(int i = s.Length-1; i>=0;i--)
+      {
+        
+           string cut =s.Substring(i);
+           char[] temp = cut.ToCharArray();
+           Array.Reverse(temp);
+           string newstri = String.Concat(new string(temp),s);
+           if(IsPalindrome(newstri))
+           {
+             int len = newstri.Length;
+             if(len < minlength)
+             {
+               minlength = len;
+               minstring = newstri;
+             }
+           }
+          
+      }
+      
+      return minstring;
+      
+        
+    }
+    
+    public static bool IsPalindrome(string word)
+    {
+      int start = 0;
+      int end = word.Length-1;
+      
+      while(start < end)
+      {
+        if(word[start] != word[end])
+        {
+          return false;
+        }
+        
+        else
+        {
+          start++;
+          end--;
+        }
+      }
+      
+      return true;
+    }
+}
