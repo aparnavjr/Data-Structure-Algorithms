@@ -1,0 +1,50 @@
+public void Main()
+{
+  
+ 
+  string str= "thisisatest";
+  HashSet<string> map = new HashSet<string>();
+  map.Add("this");
+  map.Add("is");
+  
+  
+  if(map.Count == 0 || str.Length == 0)
+    	return;
+  
+  helper(str, map);
+  
+
+  
+}
+
+public string helper(string words, HashSet<string> map )
+{
+  
+  if(map.Contains(words))
+    	return words;
+  
+  for(int i = 1;i< words.Length;i++)
+  {
+    
+    string prefix = words.Substring(0,i);
+
+    if(map.Contains(prefix))
+    {
+      
+      string suffix = words.Substring(i, words.Length-i);
+     
+      helper(suffix, map);
+      if(suffix!=null)
+      {
+        Console.WriteLine(prefix);
+      }
+        
+    }
+    
+    
+  }
+  
+  return null;
+}
+
+//Any classes if required
