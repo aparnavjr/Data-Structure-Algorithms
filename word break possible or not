@@ -1,0 +1,21 @@
+public class Solution {
+    public boolean wordBreak(String s, Set<String> wordDict) {
+        if (s == null || wordDict == null) {
+          return false;
+        }
+        boolean[] store = new boolean[s.length()+1]; 
+        store[0] = true;
+        for (int i = 0; i < s.length(); i++) {
+          if (i == 0 || store[i] == true) {
+            for (String str : wordDict) {
+              int len = str.length();
+              if (i + len <= s.length() && s.substring(i, i+len).equals(str)) {
+                store[i+len] = true;
+              }
+            }
+          }
+        }
+        return store[s.length()];
+    }
+        
+    }
